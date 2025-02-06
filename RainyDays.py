@@ -1,6 +1,6 @@
 import adafruit_bme680
 
-print("Hello World!")
+print("Starting Measurements!")
 
 import time
 import board
@@ -18,3 +18,4 @@ while timelimit != 60:
 	print("Altitude = %0.2f meters" % bme680.altitude)
 	timelimit = timelimit+1
 	time.sleep(2)
+Print("Done!!")
