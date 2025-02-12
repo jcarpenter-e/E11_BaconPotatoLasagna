@@ -8,9 +8,9 @@ Example sketch to connect to PM2.5 sensor with either I2C or UART.
 # pylint: disable=unused-import
 import time
 import board
-# import busio
+import busio
 from digitalio import DigitalInOut, Direction, Pull
-from adafruit_pm25.i2c import PM25_I2C
+#from adafruit_pm25.i2c import PM25_I2C
 
 
 reset_pin = None
@@ -48,10 +48,10 @@ import csv
 
 pm_data = open("pm25_data.csv",'w', newline = None)
 csvwriter = csv.writer(pm_data,delimiter = ',')
-csvwriter.writerow(["Time","PM 1.0 Standard Conc.","PM 2.5 Standard Conc.","PM 10 Standard Conc.", 
-                    "Particles > 0.3um / 0.1L air:", "Particles > 0.5um / 0.1L air:", 
-                    "Particles > 1.0um / 0.1L air:","Particles > 2.5um / 0.1L air:",
-                    "Particles > 5.0um / 0.1L air:","Particles > 10 um / 0.1L air:"])
+csvwriter.writerow(["Time","PM 1.0 Standard Conc.","PM 2.5 Standard Conc.","PM 10 Standard Conc.",
+                    "Particles > 0.3um / 0.1L air:", "Particles > 0.5um / 0.1L air:",
+                    "Particles > 1.0um / 0.1L air:", "Particles > 2.5um / 0.1L air:",
+                    "Particles > 5.0um / 0.1L air:", "Particles > 10 um / 0.1L air:"])
 for i in range(60):
     aqdata = pm25.read()
 
