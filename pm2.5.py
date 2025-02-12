@@ -73,5 +73,4 @@ for i in range(60):
     um100 = aqdata["particles 100um"]
     csvwriter.writerow([timestamp,PM1stan,PM2_5stan,PM10stan,PM1envr,PM2_5envr,PM10envr,um03,um05,um10,um25,um50,um100])
     time.sleep(1)
-
 pm_data.close()
