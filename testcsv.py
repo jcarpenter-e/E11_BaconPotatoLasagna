@@ -1,6 +1,6 @@
 import csv
 import time
-import np
+import numpy as np
 
 file = open('test.csv', 'w', newline = None)
 
