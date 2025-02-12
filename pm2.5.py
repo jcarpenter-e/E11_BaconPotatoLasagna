@@ -44,37 +44,34 @@ pm25 = PM25_UART(uart, reset_pin)
 # i2c = busio.I2C(board.SCL, board.SDA, frequency=100000)
 # Connect to a PM2.5 sensor over I2C
 # pm25 = PM25_I2C(i2c, reset_pin)
+import csv
 
-print("Found PM2.5 sensor, reading data...")
+pm_data = open("pm25_data.csv",'w', newline = None)
+csvwriter = csv.writer(pm_data,delimiter = ',')
+csvwriter.writerow(["Time","PM 1.0 Standard Conc.","PM 2.5 Standard Conc.","PM 10 Standard Conc.", "Particles > 0.3um / 0.1L air:",
+                    "Particles > 0.5um / 0.1L air:", "Particles > 1.0um / 0.1L air:","Particles > 2.5um / 0.1L air:","Particles > 5.0um / 0.1L air:",
+                    "Particles > 10 um / 0.1L air:"
+])
+aqdata=pm25.read()
+for 1 in range(60):
 
-while True:
+    timestamp = time.time()
+
+    PM1stan = aqdata["pm10 standard"]
+    PM2_5stan = aqdata["pm25 standard"]
+    PM10stan = aqdata["pm100 standard"]
+
+    PM1envr = aqdata["pm10 env"]
+    PM2_5envr = aqdata["pm25 env"]
+    PM10envr = aqdata["pm100 env"]
+
+    um03 = aqdata["particles 03um"]
+    um05 = aqdata["particles 05um"]
+    um10 = aqdata["particles 10um"]
+    um25 = aqdata["particles 25um"]
+    um50 = aqdata["particles 50um"]
+    um100 = aqdata["particles 100um"]
+    csvwriter.writerow([timestamp,PM1stan,PM2_5stan,PM10stan,PM1envr,PM2_5envr,PM10envr,um03,um05,um10,um25,um50,um100])
     time.sleep(1)
 
-    try:
-        aqdata = pm25.read()
-        # print(aqdata)
-    except RuntimeError:
-        print("Unable to read from sensor, retrying...")
-        continue
-
-    print()
-    print("Concentration Units (standard)")
-    print("---------------------------------------")
-    print(
-        "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
-        % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"])
-    )
-    print("Concentration Units (environmental)")
-    print("---------------------------------------")
-    print(
-        "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
-        % (aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"])
-    )
-    print("---------------------------------------")
-    print("Particles > 0.3um / 0.1L air:", aqdata["particles 03um"])
-    print("Particles > 0.5um / 0.1L air:", aqdata["particles 05um"])
-    print("Particles > 1.0um / 0.1L air:", aqdata["particles 10um"])
-    print("Particles > 2.5um / 0.1L air:", aqdata["particles 25um"])
-    print("Particles > 5.0um / 0.1L air:", aqdata["particles 50um"])
-    print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
-    print("---------------------------------------")
+pm_data.close()
