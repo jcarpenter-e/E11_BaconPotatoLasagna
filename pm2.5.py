@@ -52,8 +52,8 @@ csvwriter.writerow(["Time","PM 1.0 Standard Conc.","PM 2.5 Standard Conc.","PM 1
                     "Particles > 0.3um / 0.1L air:", "Particles > 0.5um / 0.1L air:", 
                     "Particles > 1.0um / 0.1L air:","Particles > 2.5um / 0.1L air:",
                     "Particles > 5.0um / 0.1L air:","Particles > 10 um / 0.1L air:"])
-aqdata=pm25.read()
 for i in range(60):
+    aqdata = pm25.read()
 
     timestamp = time.time()
 
