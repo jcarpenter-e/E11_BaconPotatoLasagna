@@ -18,8 +18,11 @@ import adafruit_bme680
 i2c = board.I2C()
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
 bme680.sea_level_pressure = 1013.25
-
-timelimit = 60
+if len(sys.argv) < 2:
+    print("This script requires an input argument specifying the run time in seconds")
+    exit()
+else:
+    timelimit = int(sys.argv[1])
 ctime = 0
 
 mobiledata = open("BME680_PM25.csv",'w', newline = None)
@@ -29,6 +32,7 @@ csvwriter.writerow(["Time","PM 1.0 Standard Conc.","PM 2.5 Standard Conc.","PM 1
                     "Particles > 1.0um / 0.1L air:", "Particles > 2.5um / 0.1L air:",
                     "Particles > 5.0um / 0.1L air:", "Particles > 10 um / 0.1L air:",
                     "Temperature","Gas","Humidity","Pressure","Altitude"])
+
 while ctime < timelimit:
     ctime +=1
     aqdata = pm25.read()
