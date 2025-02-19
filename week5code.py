@@ -55,6 +55,7 @@ while ctime < timelimit:
     humid = round(bme680.humidity,2)
     pressure = round(bme680.pressure,2)
     altitude = round(bme680.altitude,2)
+    print(f"Measuring count {ctime}")
 
     csvwriter.writerow([timestamp,PM1stan, PM2_5stan, PM10stan,um03,um05,um10,um25,um50,um100,temp,gas,humid,pressure,altitude])
     time.sleep(1)
