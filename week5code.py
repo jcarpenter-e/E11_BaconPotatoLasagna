@@ -7,6 +7,7 @@ from digitalio import DigitalInOut, Direction, Pull
 
 import serial
 uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=0.25)
+
 reset_pin = None
 
 from adafruit_pm25.uart import PM25_UART
@@ -25,8 +26,8 @@ if len(sys.argv) < 2:
 else:
     timelimit = int(sys.argv[1])
 ctime = 0
-
-mobiledata = open("BME680_PM25.csv",'w', newline = None)
+filename = str(sys.argv[2])
+mobiledata = open(filename,'w', newline = None)
 csvwriter = csv.writer(mobiledata,delimiter = ',')
 csvwriter.writerow(["Time","PM 1.0 Standard Conc.","PM 2.5 Standard Conc.","PM 10 Standard Conc.",
                     "Particles > 0.3um / 0.1L air:", "Particles > 0.5um / 0.1L air:",
