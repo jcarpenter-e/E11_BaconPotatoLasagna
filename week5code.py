@@ -29,7 +29,7 @@ if len(sys.argv) < 2:
 else:
     timelimit = int(sys.argv[1])
 ctime = 0
-filename = str(sys.argv[3])
+filename = str(sys.argv[3]) + ".csv"
 
 mobiledata = open(filename,'w', newline = None)
 csvwriter = csv.writer(mobiledata,delimiter = ',')
