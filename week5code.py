@@ -21,7 +21,7 @@ i2c = board.I2C()
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
 bme680.sea_level_pressure = 1013.25
 
-time.sleep(sys.argv[2])
+time.sleep(int(sys.argv[2]))
 
 if len(sys.argv) < 2:
     print("This script requires an input argument specifying the run time in seconds")
