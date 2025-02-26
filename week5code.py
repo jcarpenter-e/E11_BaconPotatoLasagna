@@ -20,13 +20,17 @@ import adafruit_bme680
 i2c = board.I2C()
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
 bme680.sea_level_pressure = 1013.25
+
+time.sleep(sys.argv[2])
+
 if len(sys.argv) < 2:
     print("This script requires an input argument specifying the run time in seconds")
     exit()
 else:
     timelimit = int(sys.argv[1])
 ctime = 0
-filename = str(sys.argv[2])
+filename = str(sys.argv[3])
+
 mobiledata = open(filename,'w', newline = None)
 csvwriter = csv.writer(mobiledata,delimiter = ',')
 csvwriter.writerow(["Time","PM 1.0 Standard Conc.","PM 2.5 Standard Conc.","PM 10 Standard Conc.",
