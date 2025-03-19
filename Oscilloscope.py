@@ -4,8 +4,10 @@ import time
 import sys
 import csv
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(11, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
 count = 0
-channel = 11 
 def my_callback(channeln):
     print('Event Detected at ' + str(datetime.datetime.now()))
     global count 
