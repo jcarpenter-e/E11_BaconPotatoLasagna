@@ -12,8 +12,8 @@ def my_callback(channeln):
     print('Event Detected at ' + str(datetime.datetime.now()))
     global count 
     count += 1
-GPIO.setmode(GPIO.BOARD)
-GPIO.add_event_detect(channel, GPIO.FALLING, callback= my_callback)  # add rising edge detection on a channel
+
+GPIO.add_event_detect(11, GPIO.FALLING, callback= my_callback)  # add rising edge detection on a channel
 
 timelimit = int(sys.argv[1])
 counttime = 0
@@ -28,3 +28,4 @@ while counttime < timelimit:
     csvwriter.writerows(count)
     count = 0
     time.sleep(60)
+mobiledata.close()
