@@ -4,33 +4,25 @@ import time
 import sys
 import csv
 
+count = 0
 channel = 11 
 def my_callback(channeln):
-    if GPIO.input(channeln) == GPIO.LOW:
-        print('Event Detected at ' + str(datetime.datetime.now()))
-        return True
-    else:
-        return False
+    print('Event Detected at ' + str(datetime.datetime.now()))
+    global count 
+    count += 1
 
-GPIO.add_event_detect(channel, GPIO.FALLING)  # add rising edge detection on a channel
+GPIO.add_event_detect(channel, GPIO.FALLING, callback= my_callback)  # add rising edge detection on a channel
 
-if len(sys.argv) < 2:
-    print("This script requires an input argument specifying the run time in seconds")
-    exit()
-else:
-    timelimit = int(sys.argv[1])
+timelimit = int(sys.argv[1])
 counttime = 0
 
 filename = str(sys.argv[2]) + ".csv"
 mobiledata = open(filename,'w', newline = None)
 csvwriter = csv.writer(mobiledata,delimiter = ',')
-csvwriter.writerow()
+csvwriter.writerow("Counts in the Last Minute")
 
-
-count = 0
 while counttime < timelimit:
     counttime += 1
-    if my_callback(channel) == True:
-        count += 1
-
-    
+    csvwriter.writerows(count)
+    count = 0
+    time.sleep(60)
