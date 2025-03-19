@@ -25,7 +25,7 @@ csvwriter.writerow("Counts in the Last Minute")
 
 while counttime < timelimit:
     counttime += 1
-    csvwriter.writerow(count)
+    csvwriter.writerow([count])
     count = 0
     time.sleep(60)
 mobiledata.close()
