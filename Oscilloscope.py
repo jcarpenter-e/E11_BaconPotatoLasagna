@@ -21,10 +21,9 @@ filename = str(sys.argv[3]) + ".csv"
 mobiledata = open(filename,'w', newline = None)
 csvwriter = csv.writer(mobiledata,delimiter = ',')
 csvwriter.writerow(["Counts in the Last Minute"])
-
 while counttime < timelimit:
     counttime += 1
+    time.sleep(int(sys.argv[2]))
     csvwriter.writerow([count])
     count = 0
-    time.sleep(int(sys.argv[2]))
 mobiledata.close()
